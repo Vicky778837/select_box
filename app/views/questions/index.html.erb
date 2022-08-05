@@ -1,0 +1,36 @@
+<%= form_tag destroy_multiple_questions_path, method: :delete do %>
+<table class="footable table table-bordered toggle-arrow-tiny" data-page-size="31" data-filter=#filter>
+<thead>
+<tr>
+  <th>Active</th>
+  <th>Order</th>
+  <th>Question</th>
+  <th data-sort-ignore="true"><input type="checkbox" id="selectAll"></input></th>
+</tr>
+</thead>
+<tbody>
+<% @questions.each do |question| %>
+  <tr>
+    <td><%= question.active %></td>
+    <td><%= question.sort %></td>
+    <td><%= question.question %></td>
+    <td><%= check_box_tag "question_ids[]", question.id, false, class: 'selectable' %></td>
+  </tr>
+<% end %>
+</tbody>
+<tfoot>
+<tr>
+    <td colspan="12">
+ <ul class="pagination pull-right"></ul>
+    </td>
+</tr>
+</tfoot>
+</table>
+<%= submit_tag "Delete selected", :class => 'btn btn-primary btn-xs' %>
+<% end %>
+
+<script type="text/javascript">
+  $(function() {
+  $("#selectAll").select_all();
+});
+</script>
